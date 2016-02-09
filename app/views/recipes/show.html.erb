@@ -7,8 +7,10 @@
 
 <p>
   <strong>Author:</strong>
-  <%= @recipe.author %>
+  <%= @recipe.user.email %>
 </p>
+
+<%= image_tag @recipe.avatar.url(:medium), class: "img-responsive" %>
 
 <p>
   <strong>Ingredients:</strong>
@@ -26,6 +28,12 @@
 </p>
 
 <%= render 'comments/form' %>
+
+<h2>Comments</h2>
+<% @recipe.comments.each do |comment| %>
+<p><%= comment.user.email %> said:</p>
+<%= comment.entry %>
+<% end %>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>
